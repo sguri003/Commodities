@@ -3,33 +3,29 @@ import pandas as pd
 import sqlalchemy as sq  
 import json 
 import xml
+import pyodbc as py
 
 
-class DB_Main:
+class DB:
+    conn: sq.Connection
+    def __init__(self, server, db_nm):
+        self.db_nm = db_nm
+        self.server = server
+        self.conn = self.sql_cnx()
     
-    def __init__(self):
-        self.DB_NAME = "Labor_Stats"
-        self.SERVER = "DESKTOP-03RVSDU\SQLEXPRESS"
-        
+    def sql_cnx(self):
+        conn_str = f"mssql+pyodbc://{self.server}/{self.db_nm}?driver=ODBC+Driver+17+for+SQL+Server"
+        engine = sq.create_engine(conn_str)
+        cnx = engine.connect()
+        dt = pd.read_sql("select * from dbo.Stocks", con=cnx)
+        print(dt)
+        #cnx.close()
+        return cnx
     
-    def cnx(self):
-        conn=None
-        engine=None
-        conn_str = f'mssql+pyodbc://{self.SERVER}/{self.DB_NAME}?driver=ODBC+Driver+SQL+Server+17'
-        try: 
-        #f"mssql+pyodbc:///?odbc_connect={conn_str}"
-            engine = sq.create_engine(conn_str)
-            conn  = engine.connect()
-            print(f"Connection to Server {self.SERVER} and {self.DB_NAME} successful")
-        except:
-            print(f"Failed to connect  {self.SERVER} and {self.DB_NAME}")
-        qry = pd.read_sql_query('select * from dbo.CPI_Data'  ,con=conn)
-        df = pd.DataFrame(data=qry)
-        print(df.head(5).sort_values(by='Dt', ascending=False))
-        #print(my_dict.keys())
-        #conn.close()
-        return conn
-     
+    def close_cnx(self): 
+        print('Closing Connection to DB')
+        self.conn.close()
+    
     def qry_df(self):
         conn = self.cnx()
         qry = pd.read_sql_query('select * from dbo.CPI_Data'  ,con=conn)
@@ -65,6 +61,6 @@ class DB_Main:
         print(x)
      
             
-x = DB_Main()
-x.cnx()
+x = DB(server='DESKTOP-03RVSDU\SQLEXPRESS', db_nm='Labor_Stats')
+cnx = x.sql_cnx()
     

@@ -7,6 +7,7 @@ import fredapi as fred
 from datetime import date
 import sqlalchemy as sq
 import pyodbc as py
+from DB import DB
 
 class Stocks:
     
@@ -87,9 +88,19 @@ class Stocks:
         conn_str = f"mssql+pyodbc://{SERVER}/{DB_NAME}?driver=ODBC+Driver+17+for+SQL+Server"
         engine = sq.create_engine(conn_str)
         cnx = engine.connect()
-        df.to_sql(name='Stocks', schema='dbo'
+        df.to_sql(name='Stocks_Test', schema='dbo'
             , con=cnx, if_exists='replace', index=False,index_label=False)
+        
+    def sql_insert(self,df:pd.DataFrame):
+        SERVER= "DESKTOP-03RVSDU\SQLEXPRESS"
+        DB_NAME = "Labor_Stats"
+        db = DB(server=SERVER, db_nm=DB_NAME)
+        cnx = db.sql_cnx()
+        df.to_sql(name='Stocks_Test', schema='dbo'
+            , con=cnx, if_exists='replace', index=False,index_label=False)
+        db.close_cnx()    
 
 st = Stocks()
 df = st.test_dt()
 #st.insert_db(df) 
+st.sql_insert(df)
