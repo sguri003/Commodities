@@ -9,6 +9,7 @@ import sqlalchemy as sq
 import pyodbc as py
 from DB import DB
 
+
 class Stocks:
     
     def __init__(self):
@@ -37,17 +38,13 @@ class Stocks:
         fed =usd_fred.to_frame()
         print(usd_fred)
         
-    def get_ticks(self)->pd.DataFrame:
+    def ticks_plt(self)->pd.DataFrame:
         ticker_lst =['PL=F', 'GC=F','SI=F','HG=F','PA=F','DXY']
         dt = yf.download(ticker_lst, start='2015-01-01', group_by='ticker')
         #Download historical data for the last year
         dt = pd.DataFrame(data=dt)
-        dt_dt = dt.reset_index()
-        #print(cols)
-        print(dt_dt.head(10))
-        print(dt_dt.columns)
-        print(type(dt_dt))
-        return dt_dt
+        #dt_dt = dt.reset_index()
+        return dt
 
     def test_dt(self)->pd.DataFrame:
         ticker_lst =['PL=F', 'GC=F','SI=F','HG=F','PA=F','DXY']
@@ -71,9 +68,9 @@ class Stocks:
         plt.plot(y2, label='Platinum', color='gray')
         plt.plot(y3, label='USD', color='green')
         #plt.plot(y4, label='Raytheon', color='orange')
-        plt.title('Gold Price Trend Over Time')
+        plt.title('Precious Metals to USD Index Yahoo Finance')
         plt.xlabel('Date')
-        plt.ylabel('Gold Price (USD)')
+        plt.ylabel('US Dollar')
         #plt.ylabel('Raytheon')
         y_tick_locations = np.arange(500, 4000, 500) #start, stop, step
         plt.yticks(y_tick_locations)
@@ -90,6 +87,7 @@ class Stocks:
         cnx = engine.connect()
         df.to_sql(name='Stocks_Test', schema='dbo'
             , con=cnx, if_exists='replace', index=False,index_label=False)
+        cnx.close()
         
     def sql_insert(self,df:pd.DataFrame):
         SERVER= "DESKTOP-03RVSDU\SQLEXPRESS"
@@ -97,11 +95,14 @@ class Stocks:
         #Call DB class with server and name parameters
         db = DB(server=SERVER, db_nm=DB_NAME)
         cnx = db.sql_cnx()
-        df.to_sql(name='Stocks_Test', schema='dbo'
+        df.to_sql(name='Stock_QA', schema='dbo'
             , con=cnx, if_exists='replace', index=False,index_label=False)
         #close connection DB:Close()
+        print(sq.inspect(cnx).has_table('Stocks_Test'))
         db.close_cnx()    
 
 st = Stocks()
+#df = st.ticks_plt()
 df = st.test_dt()
-st.sql_insert(df)
+#st.plotting(df)
+st.insert_db(df=df)

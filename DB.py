@@ -13,13 +13,12 @@ class DB:
         self.server = server
         self.conn = self.sql_cnx()
     
-    def sql_cnx(self):
+    def sql_cnx(self)->sq.Connection:
         conn_str = f"mssql+pyodbc://{self.server}/{self.db_nm}?driver=ODBC+Driver+17+for+SQL+Server"
         engine = sq.create_engine(conn_str)
         cnx = engine.connect()
         dt = pd.read_sql("select * from dbo.Stocks", con=cnx)
         print(dt)
-        #cnx.close()
         return cnx
     
     def close_cnx(self): 
