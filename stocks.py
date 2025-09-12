@@ -94,13 +94,14 @@ class Stocks:
     def sql_insert(self,df:pd.DataFrame):
         SERVER= "DESKTOP-03RVSDU\SQLEXPRESS"
         DB_NAME = "Labor_Stats"
+        #Call DB class with server and name parameters
         db = DB(server=SERVER, db_nm=DB_NAME)
         cnx = db.sql_cnx()
         df.to_sql(name='Stocks_Test', schema='dbo'
             , con=cnx, if_exists='replace', index=False,index_label=False)
+        #close connection DB:Close()
         db.close_cnx()    
 
 st = Stocks()
 df = st.test_dt()
-#st.insert_db(df) 
 st.sql_insert(df)
