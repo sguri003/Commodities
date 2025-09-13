@@ -23,8 +23,8 @@ class BLS_CPI:
         parameters = json.dumps({'seriesid' : series_id, 'startyear' : start_year, 'endyear' : end_year, 'calculations' : True , 'registrationkey' : reg_key})
         # Get data in JSON format and then write it to a CSV file.
         json_data = self.get_cpi(headers, parameters)
-        #with open('CPI_QA.json' , 'w') as qa:
-            #json.dump(json_data, fp=qa, indent=4)
+        with open('CPI_QA.json' , 'w') as qa:
+            json.dump(json_data, fp=qa, indent=4)
         self.data_to_csv(json_data)
         
         
@@ -46,7 +46,7 @@ class BLS_CPI:
         #open file to be written to CSV. 
         with open(self.out_file_nm, mode = 'w', newline = '') as data_file:
             #Series ID is category such as Gasoline, Groceries. 
-            fieldnames = ['Series ID', 'Date', 'Value', 'Annual Percent Change']
+            fieldnames = ['Series ID', 'Date', 'Value', 'Annual Per Change','Monhtly' ,'3 Months', 'Half Year', 'Yoy %']
             d_wrtr = csv.writer(data_file, delimiter = ',', quotechar = '"', quoting = csv.QUOTE_ALL)
             #Place Headers
             d_wrtr.writerow(fieldnames)
@@ -63,11 +63,16 @@ class BLS_CPI:
                     pct_changes = calculations['pct_changes']
                     #get the 12th month in the JSON:
                     annual_pct_chg = pct_changes['12']
+                    mnthly = pct_changes['1']
+                    mth_3 = pct_changes['3']
+                    half_yr = pct_changes['6']
+                    yoy = pct_changes['12']
                     # Create a month field in the format of a date for 
                     # the first day of each month (for example: January 1, 2022).
                     month = period_name + ' 1 ' + year
                     #Write the CSV record to the output file.
-                    d_wrtr.writerow([series_id, month, value, annual_pct_chg])
+                    d_wrtr.writerow([series_id, month, value,annual_pct_chg  
+                                 ,mnthly,mth_3,half_yr, yoy])
         #place in dataframe format from
         dt = pd.read_csv(self.out_file_nm)
         df_cpi = pd.DataFrame(data=dt)
