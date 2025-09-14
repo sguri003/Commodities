@@ -31,15 +31,15 @@ class Stocks:
     
     def get_fed(self):
         f = fred.Fred(api_key=self.get_ky())
-        usd_fred = f.get_series('JTSHIR', observation_start='2015-01-01' ,observation_end='2025-07-01')
-                                #,observation_end=self.get_today())
-        #usd_jobs = f.get_series('JTSJOB', observation_start='2015-01-01' ,observation_end='2025-08-01')
+        usd_fred = f.get_series('JTUJOR', observation_start='2015-01-01'
+                                ,observation_end='2025-08-01')
         print(type(usd_fred))
-        usd_fred = pd.Series(usd_fred, name=['Dt','Hires'])
-        #fed =usd_fred.to_frame()
-        #combined = pd.concat(usd_fred, usd_jobs)
-        usd_fred.to_csv('Hires.csv')
-        print(usd_fred)
+        df_fed = pd.DataFrame(data=usd_fred).reset_index()
+        df_fed.columns = ['Dt', 'Per_Value']
+        df_fed['Dt'] = pd.to_datetime(df_fed['Dt'], format='mixed')
+        df_fed.sort_values(by='Dt', ascending=False)
+        df_fed.to_csv('Job_Openings.csv')
+        print(df_fed)
         
    
     def insert_db(self,df:pd.DataFrame):

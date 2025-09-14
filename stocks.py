@@ -46,7 +46,7 @@ class Stocks:
         #dt_dt = dt.reset_index()
         return dt
 
-    def test_dt(self)->pd.DataFrame:
+    def ticks_sql(self)->pd.DataFrame:
         ticker_lst =['PL=F', 'GC=F','SI=F','HG=F','PA=F','DXY']
         dt = yf.download(ticker_lst, start='2010-01-01', group_by='ticker')
         #Download historical data for the last year
@@ -85,7 +85,7 @@ class Stocks:
         conn_str = f"mssql+pyodbc://{SERVER}/{DB_NAME}?driver=ODBC+Driver+17+for+SQL+Server"
         engine = sq.create_engine(conn_str)
         cnx = engine.connect()
-        df.to_sql(name='Stocks_Test', schema='dbo'
+        df.to_sql(name='Stocks_Py', schema='dbo'
             , con=cnx, if_exists='replace', index=False,index_label=False)
         cnx.close()
         
@@ -103,6 +103,6 @@ class Stocks:
 
 st = Stocks()
 #df = st.ticks_plt()
-df = st.test_dt()
+df = st.ticks_sql()
 #st.plotting(df)
 st.insert_db(df=df)
