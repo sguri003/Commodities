@@ -1,6 +1,6 @@
 {
     "status": "REQUEST_SUCCEEDED",
-    "responseTime": 191,
+    "responseTime": 218,
     "message": [
         "BLS does not produce net change calculations for Series CUSR0000SETB01",
         "BLS does not produce net change calculations for Series CUSR0000SAF1",

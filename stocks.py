@@ -85,7 +85,7 @@ class Stocks:
         conn_str = f"mssql+pyodbc://{SERVER}/{DB_NAME}?driver=ODBC+Driver+17+for+SQL+Server"
         engine = sq.create_engine(conn_str)
         cnx = engine.connect()
-        df.to_sql(name='Stocks_Py', schema='dbo'
+        df.to_sql(name='Stocks_Test', schema='dbo'
             , con=cnx, if_exists='replace', index=False,index_label=False)
         cnx.close()
         
@@ -100,9 +100,15 @@ class Stocks:
         #close connection DB:Close()
         print(sq.inspect(cnx).has_table('Stocks_Test'))
         db.close_cnx()    
-
+    
+    def csv_x(self, df:pd.DataFrame):
+        df['Gld_Close'] = df['GC=F_Close'].round(2)
+        df.to_csv('Silver_Price.csv', columns=['Date_', 'Gld_Close'])
+        
+        
 st = Stocks()
 #df = st.ticks_plt()
 df = st.ticks_sql()
 #st.plotting(df)
-st.insert_db(df=df)
+st.csv_x(df=df)
+#st.insert_db(df=df)

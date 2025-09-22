@@ -77,7 +77,7 @@ class BLS_CPI:
         dt = pd.read_csv(self.out_file_nm)
         df_cpi = pd.DataFrame(data=dt)
         df_cpi['Date'] = pd.to_datetime(dt['Date'], format="mixed")
-        df_cpi.to_csv("CPI_2010_Current_Frame.csv")
+        df_cpi.to_csv("CPI_Data_ML.csv")
         print(df_cpi)
 
 
@@ -86,6 +86,6 @@ BLS_API_KEY = df_ky['BLS_API'][0]
 #CPI_Data = CPI_BLS(BLS_API_KEY, 'CPI_QA.csv',
 #                       ['CUSR0000SETB01', 'CUSR0000SAF1', 'CUSR0000SETA02']
 #                         ,2010, 2025)
-CPI_Data = BLS_CPI(BLS_API_KEY, 'CPI-2011-Aug.csv',
+CPI_Data = BLS_CPI(BLS_API_KEY, 'CPI.csv',
                         ['CUSR0000SA0','CUSR0000SETB01', 'CUSR0000SAF1', 'CUSR0000SETA02']
                          ,2010, 2025)

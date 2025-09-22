@@ -6,7 +6,7 @@ import numpy as np
 import datetime
 import re
 
-class DB_Pull:
+class DB_Conns:
     #static variable
     DB_NAME = "Labor_Stats"
     SERVER = "DESKTOP-03RVSDU\SQLEXPRESS"
