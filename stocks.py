@@ -16,7 +16,7 @@ class Stocks:
          self
       
     def get_ky(self):
-        f_key = pd.read_csv('API_KEY.csv')
+        f_key = pd.read_csv('../src/API_KEY.csv')
         ky = f_key['Fred_key'][0]
         formatted_date_1 = str(date.today().strftime("%d-%m-%Y"))
         print(formatted_date_1)
@@ -85,7 +85,7 @@ class Stocks:
         conn_str = f"mssql+pyodbc://{SERVER}/{DB_NAME}?driver=ODBC+Driver+17+for+SQL+Server"
         engine = sq.create_engine(conn_str)
         cnx = engine.connect()
-        df.to_sql(name='Stocks_Test', schema='dbo'
+        df.to_sql(name='Stocks_New', schema='dbo'
             , con=cnx, if_exists='replace', index=False,index_label=False)
         cnx.close()
         
@@ -110,5 +110,5 @@ st = Stocks()
 #df = st.ticks_plt()
 df = st.ticks_sql()
 #st.plotting(df)
-st.csv_x(df=df)
-#st.insert_db(df=df)
+#st.csv_x(df=df)
+st.insert_db(df=df)

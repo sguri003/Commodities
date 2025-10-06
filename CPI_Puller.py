@@ -25,6 +25,7 @@ BLS_API_KEY = df_ky['BLS_API'][0]
 cpi = BLS_CPI(BLS_API_KEY, 'CPI_2011-MTD.csv',
                         ['CUSR0000SA0', 'CUSR0000SETB01', 'CUSR0000SAF1', 'CUSR0000SETA02']
                         , 2011, 2025)
+
 #pd = BLS(BLS_API_KEY, 'POWER_OUTPUT_2015-MTD.csv'
 #                                ,['IPUCN2211__T051000000', 'IPUCN2211__T011000000']
 #                                , 2015, 2025 )

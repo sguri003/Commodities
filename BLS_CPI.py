@@ -46,7 +46,7 @@ class BLS_CPI:
         #open file to be written to CSV. 
         with open(self.out_file_nm, mode = 'w', newline = '') as data_file:
             #Series ID is category such as Gasoline, Groceries. 
-            fieldnames = ['Series ID', 'Date', 'Value', 'Annual Per Change','Monhtly' ,'3 Months', 'Half Year', 'Yoy %']
+            fieldnames = ['Series ID', 'Date', 'Value', 'Annual_Per','Monhtly' ,'3_Months', 'Half-Year', 'Yoy %']
             d_wrtr = csv.writer(data_file, delimiter = ',', quotechar = '"', quoting = csv.QUOTE_ALL)
             #Place Headers
             d_wrtr.writerow(fieldnames)
