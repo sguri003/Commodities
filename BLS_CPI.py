@@ -11,7 +11,8 @@ import json
 import csv
 import requests
 import numpy as np                
-import pandas as pd    
+import pandas as pd  
+import sqlalchemy as sq
              
 #new comming
 class BLS_CPI:
@@ -25,8 +26,8 @@ class BLS_CPI:
         json_data = self.get_cpi(headers, parameters)
         with open('CPI_QA.json' , 'w') as qa:
             json.dump(json_data, fp=qa, indent=4)
-        self.data_to_csv(json_data)
-        
+        df = self.data_to_csv(json_data)
+        self.insert_sql(df=df)
         
     #retrive cpi data from BLS AP
     def get_cpi(self, headers, parameters):
@@ -79,9 +80,22 @@ class BLS_CPI:
         df_cpi['Date'] = pd.to_datetime(dt['Date'], format="mixed")
         df_cpi.to_csv("CPI_Data_ML.csv")
         print(df_cpi)
+        return df_cpi
 
-
-df_ky = pd.read_csv('API_KEY.csv')
+    def insert_sql(self, df:pd.DataFrame):
+        SERVER= "DESKTOP-03RVSDU\SQLEXPRESS"
+        DB_NAME = "Labor_Stats"
+        conn_str = f"mssql+pyodbc://{SERVER}/{DB_NAME}?driver=ODBC+Driver+17+for+SQL+Server"
+        engine = sq.create_engine(conn_str)
+        #cast to date yyyy-mm-dd
+        cnx = engine.connect()
+        df.to_sql(name='BLS_Test_Run', schema='dbo'
+            , con=cnx, if_exists='replace', index=False,index_label=False)
+        cnx.close()
+        
+        
+        
+df_ky = pd.read_csv('src/API_KEY.csv')
 BLS_API_KEY = df_ky['BLS_API'][0]         
 #CPI_Data = CPI_BLS(BLS_API_KEY, 'CPI_QA.csv',
 #                       ['CUSR0000SETB01', 'CUSR0000SAF1', 'CUSR0000SETA02']

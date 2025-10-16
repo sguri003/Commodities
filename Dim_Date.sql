@@ -2,7 +2,7 @@ use Labor_Stats
 SET NOCOUNT ON
 TRUNCATE TABLE DimDate
 DECLARE @CurrentDate DATE = '2010-01-01'
-DECLARE @EndDate DATE = '2028-12-31'
+DECLARE @EndDate DATE = '2027-12-31'
 WHILE @CurrentDate < @EndDate
 BEGIN
    INSERT INTO [dbo].[DimDate] (

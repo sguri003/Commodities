@@ -84,8 +84,9 @@ class Stocks:
         DB_NAME = "Labor_Stats"
         conn_str = f"mssql+pyodbc://{SERVER}/{DB_NAME}?driver=ODBC+Driver+17+for+SQL+Server"
         engine = sq.create_engine(conn_str)
+        #cast to date yyyy-mm-dd
         cnx = engine.connect()
-        df.to_sql(name='Stocks_New', schema='dbo'
+        df.to_sql(name='Commodity', schema='dbo'
             , con=cnx, if_exists='replace', index=False,index_label=False)
         cnx.close()
         
