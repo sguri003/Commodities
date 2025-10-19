@@ -42,3 +42,14 @@ update dbo.Stocks set dt = format(Date_ , 'yyyy-MM-dd')
 select DATEPART(i, getdate())
 
 select format(getdate(), 'yyyy-MM-dd')
+
+
+select 
+rank() over (order by SI_Close desc)
+,dt
+from dbo.Commodity
+
+update dbo.Commodity set dt = convert(date , dt, 101)
+
+
+select  convert(date, getdate(), 101)
