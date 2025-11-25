@@ -86,6 +86,8 @@ class Stocks:
         engine = sq.create_engine(conn_str)
         #cast to date yyyy-mm-dd
         cnx = engine.connect()
+        df.rename(columns={'SI=F_Close': 'SI_Close', 'SI=F_Volume': 'SI_Vol',
+                           'GC=F_Close': 'GC_Close', 'GC=F_Volume':'GC_Vol', 'Date_': 'Dt'}, inplace=True)
         df.to_sql(name='Commodity', schema='dbo'
             , con=cnx, if_exists='replace', index=False,index_label=False)
         cnx.close()
