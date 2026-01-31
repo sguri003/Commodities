@@ -24,3 +24,16 @@ df_upsert = df_current.alias("current").merge(spark.createDataFrame(df_f).alias(
              "GC_F_Open": "new.GC_F_Open", "GC_F_High": "new.GC_F_High",  "GC_F_Low": "new.GC_F_Low", "GC_F_Volume": "new.GC_F_Volume"}
     ).whenNotMatchedInsertAll().execute()
 df_upsert.write.mode("append").format("delta").option("mergeSchema", "true").saveAsTable("futures.adf_run_2")
+
+
+#  df = spark.read \
+#        .format("sqlanalytics") \
+#        .option("fabricWarehouse", "<Warehouse_Name>") \
+#        .option("table", "<Table_or_View_Name>") \
+#        .load()
+
+# Define the three-part naming convention for your table/view
+# Format: <LakehouseName>.<SchemaName>.<TableNameOrViewName>
+#table_identifier = "YourLakehouseName.dbo.YourTableName"
+# Read data from the SQL Analytics Endpoint into a Spark DataFrame
+#df = spark.read.synapsesql(table_identifier)

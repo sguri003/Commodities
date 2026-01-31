@@ -3,6 +3,9 @@ import numpy as np
 import pandas as pd 
 import os 
 import csv
+import azure.storage.blob
+from azure.storage.blob import BlobServiceClient, ContainerClient
+
 
 def delta_json_format():
     with open('Delta_log_2.json', 'r')as d_in:
@@ -34,8 +37,16 @@ def rd():
             row.split(',')[1]
             wtr.writerow([row.split(',')[1],row.split(',')[2]])
         fout.close()
-            
-            
+
+def read_blob():
+    blob_path = "abfss://bronze@greedysotre.dfs.core.windows.net/"
+    blob_token = "sp=rcw&st=2025-11-30T14:42:15Z&se=2025-11-30T22:57:15Z&sv=2024-11-04&sr=c&sig=sENzYgcCYxggpsFBCkjxxudQCN2GXGYPJZJTjhEOweg%3D"
+    blob_url= "https://greedystore.blob.core.windows.net/bronze?sp=rcw&st=2025-11-30T14:42:15Z&se=2025-11-30T22:57:15Z&sv=2024-11-04&sr=c&sig=sENzYgcCYxggpsFBCkjxxudQCN2GXGYPJZJTjhEOweg%3D"
+    bronze = BlobServiceClient(blob_url)
+    bronze_client = bronze.get_blob_client(container='bronzze', blob='greedystore')
+    print(bronze_client)
+
 
 #rd()
-delta_json_format()   
+read_blob()
+#delta_json_format()   

@@ -53,6 +53,7 @@ class Stocks:
         dt = pd.DataFrame(data=dt)
         dt_f = dt.reset_index()
         dt_f.columns = ['_'.join(col).strip() for col in dt_f.columns.values]
+        dt_f.columns = ["".join(col).replace('=','_') for col in dt_f.columns.values]
         print(dt_f.columns)
         return dt_f    
         
