@@ -64,7 +64,7 @@ class BLS_CPI:
                     pct_changes = calculations['pct_changes']
                     #get the 12th month in the JSON:
                     annual_pct_chg = pct_changes['12']
-                    mnthly = pct_changes['1']
+                    #mnthly = pct_changes['1']
                     mth_3 = pct_changes['3']
                     half_yr = pct_changes['6']
                     yoy = pct_changes['12']
@@ -73,7 +73,8 @@ class BLS_CPI:
                     month = period_name + ' 1 ' + year
                     #Write the CSV record to the output file.
                     d_wrtr.writerow([series_id, month, value,annual_pct_chg  
-                                 ,mnthly,mth_3,half_yr, yoy])
+                                 #,mnthly,
+                                 , mth_3,half_yr, yoy])
         #place in dataframe format from
         dt = pd.read_csv(self.out_file_nm)
         df_cpi = pd.DataFrame(data=dt)
@@ -102,4 +103,4 @@ BLS_API_KEY = df_ky['BLS_API'][0]
 #                         ,2010, 2025)
 CPI_Data = BLS_CPI(BLS_API_KEY, 'CPI.csv',
                         ['CUSR0000SA0','CUSR0000SETB01', 'CUSR0000SAF1', 'CUSR0000SETA02']
-                         ,2010, 2025)
+                         ,2010, 202)

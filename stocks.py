@@ -4,7 +4,9 @@ import matplotlib.pylab as plt
 import numpy as np
 import pandas as pd
 import fredapi as fred    
+import decimal
 from datetime import date
+import re
 import sqlalchemy as sq
 import pyodbc as py
 from DB import DB
@@ -47,21 +49,22 @@ class Stocks:
         return dt
 
     def ticks_sql(self)->pd.DataFrame:
-        ticker_lst =['PL=F', 'GC=F','SI=F','HG=F','PA=F','DXY']
+        ticker_lst =['PL=F', 'GC=F','SI=F','HG=F','PA=F', 'NDX', 'XEL', 'CVX', 'B', 'MP']
         dt = yf.download(ticker_lst, start='2010-01-01', group_by='ticker')
         #Download historical data for the last year
         dt = pd.DataFrame(data=dt)
         dt_f = dt.reset_index()
         dt_f.columns = ['_'.join(col).strip() for col in dt_f.columns.values]
         dt_f.columns = ["".join(col).replace('=','_') for col in dt_f.columns.values]
-        print(dt_f.columns)
+        dt_f = np.round(dt_f, decimals=2)
+        #print(dt_f.columns)
         return dt_f    
         
         
     def plotting(self, dt: pd.DataFrame):
-        y1= dt['GC=F']['Close']
-        y2 = dt['PL=F']['Close']
-        y3 = dt['DXY']['Close']
+        y1= dt['GC_F']['Close']
+        y2 = dt['PL_F']['Close']
+        y3 = dt['SI_F']['Close']
         #y4 = dt['RTX']['Close']
         cmap = plt.cm.RdYlGn #tooltip
         plt.figure(figsize=(12, 8))
@@ -79,30 +82,21 @@ class Stocks:
         plt.grid(True)
         plt.show()
         #print(dt.head(10))
-
-    def insert_db(self,df:pd.DataFrame):
-        SERVER= "DESKTOP-03RVSDU\SQLEXPRESS"
-        DB_NAME = "Labor_Stats"
-        conn_str = f"mssql+pyodbc://{SERVER}/{DB_NAME}?driver=ODBC+Driver+17+for+SQL+Server"
-        engine = sq.create_engine(conn_str)
-        #cast to date yyyy-mm-dd
-        cnx = engine.connect()
-        df.rename(columns={'SI=F_Close': 'SI_Close', 'SI=F_Volume': 'SI_Vol',
-                           'GC=F_Close': 'GC_Close', 'GC=F_Volume':'GC_Vol', 'Date_': 'Dt'}, inplace=True)
-        df.to_sql(name='Commodity', schema='dbo'
-            , con=cnx, if_exists='replace', index=False,index_label=False)
-        cnx.close()
         
+     #USE DB CLASS         
     def sql_insert(self,df:pd.DataFrame):
         SERVER= "DESKTOP-03RVSDU\SQLEXPRESS"
         DB_NAME = "Labor_Stats"
         #Call DB class with server and name parameters
         db = DB(server=SERVER, db_nm=DB_NAME)
         cnx = db.sql_cnx()
-        df.to_sql(name='Stock_QA', schema='dbo'
+        df.rename(columns={'Date_': 'Dt'}, inplace=True)
+        df['Dt'] = pd.to_datetime(df['Dt'], format='%d/%m/%Y').dt.date
+        df['datekey'] = pd.to_datetime(df['Dt'], format='%Y%m%d').dt.strftime('%Y%m%d').astype(int)
+        df.to_sql(name='Commodity', schema='dbo'
             , con=cnx, if_exists='replace', index=False,index_label=False)
         #close connection DB:Close()
-        print(sq.inspect(cnx).has_table('Stocks_Test'))
+        print(sq.inspect(cnx).has_table('Commodity'))
         db.close_cnx()    
     
     def csv_x(self, df:pd.DataFrame):
@@ -110,9 +104,28 @@ class Stocks:
         df.to_csv('Silver_Price.csv', columns=['Date_', 'Gld_Close'])
         
         
+    #PLEASE USE THIS METHOD IF DB CLASS IS NOT WORKNG 
+    #USE FOR ADHOC PURPOSES ONLY.
+    def insert_db(self,df:pd.DataFrame):
+        SERVER= "DESKTOP-03RVSDU\SQLEXPRESS"
+        DB_NAME = "Labor_Stats"
+        conn_str = f"mssql+pyodbc://{SERVER}/{DB_NAME}?driver=ODBC+Driver+17+for+SQL+Server"
+        engine = sq.create_engine(conn_str)
+        #cast to date yyyy-mm-dd
+        cnx = engine.connect()
+        #df.rename(columns={'SI=F_Close': 'SI_Close', 'SI=F_Volume': 'SI_Vol',
+         #                  'GC=F_Close': 'GC_Close', 'GC=F_Volume':'GC_Vol', 'Date_': 'Dt'}, inplace=True)
+        df.rename(columns={'Date_': 'Dt'}, inplace=True)
+        df['Dt'] = pd.to_datetime(df['Dt'], format='%d/%m/%Y')
+        df.to_sql(name='Commodity', schema='dbo'
+            , con=cnx, if_exists='replace', index=False,index_label=False)
+        cnx.close()
+        
+        
 st = Stocks()
 #df = st.ticks_plt()
 df = st.ticks_sql()
 #st.plotting(df)
 #st.csv_x(df=df)
-st.insert_db(df=df)
+st.sql_insert(df=df)
+#st.insert_db(df=df)
