@@ -24,13 +24,16 @@ class Stocks:
         print(formatted_date_1)
         return ky
     
+    #returns current date formatted as YYYYY-MM-DD
     def get_today(self):
         formatted_date_1 = str(date.today().strftime("%d-%m-%Y"))
         return formatted_date_1
     
+    #test function for api keys
     def dt_ky(self, dt:date):
         print()
-    
+        
+    #FEDERAL RESERVE TEST FUNCTION ON US DOLLAR INDEX.
     def get_fed(self):
         f = fred.Fred(api_key=self.get_ky())
         usd_fred = f.get_series('DTWEXBGS', observation_start='2015-01-01'
@@ -40,22 +43,27 @@ class Stocks:
         fed =usd_fred.to_frame()
         print(usd_fred)
         
+
     def ticks_plt(self)->pd.DataFrame:
-        ticker_lst =['PL=F', 'GC=F','SI=F','HG=F','PA=F','DXY']
+        ticker_lst =['PL=F', 'GC=F','SI=F','HG=F','PA=F', 'CL=F', 'BZ=F' ,'DXY']
         dt = yf.download(ticker_lst, start='2015-01-01', group_by='ticker')
         #Download historical data for the last year
         dt = pd.DataFrame(data=dt)
         #dt_dt = dt.reset_index()
         return dt
 
+    #Primary function to pull tickers from yfinanace.
+    #Returns Dataframe with reshaped index...dataframe comes in series with main index of date.
+    #Yfinance returns a series with Date the index requires reshape fn().
+    #CL=F is ticker for WTI crude oil, BZ=F=Brent crude oil. 
     def ticks_sql(self)->pd.DataFrame:
-        ticker_lst =['PL=F', 'GC=F','SI=F','HG=F','PA=F', 'NDX', 'XEL', 'CVX', 'B', 'MP']
+        ticker_lst =['PL=F', 'GC=F','SI=F','HG=F','PA=F', 'CL=F', 'BZ=F' ,'NDX', 'XEL', 'CVX', 'B', 'MP']
         dt = yf.download(ticker_lst, start='2010-01-01', group_by='ticker')
         #Download historical data for the last year
         dt = pd.DataFrame(data=dt)
         dt_f = dt.reset_index()
-        dt_f.columns = ['_'.join(col).strip() for col in dt_f.columns.values]
-        dt_f.columns = ["".join(col).replace('=','_') for col in dt_f.columns.values]
+        dt_f.columns = ['_'.join(col).strip() for col in dt_f.columns.values] #transform white space to underscore.
+        dt_f.columns = ["".join(col).replace('=','_') for col in dt_f.columns.values] #change '=' to underscore.
         dt_f = np.round(dt_f, decimals=2)
         #print(dt_f.columns)
         return dt_f    
