@@ -92,6 +92,7 @@ class Stocks:
         cnx = db.sql_cnx()
         df.rename(columns={'Date_': 'Dt'}, inplace=True)
         df['Dt'] = pd.to_datetime(df['Dt'], format='%d/%m/%Y').dt.date
+        #create datekey for date dimension...turn pandas date int yyyymmdd e.g. (20260210)
         df['datekey'] = pd.to_datetime(df['Dt'], format='%Y%m%d').dt.strftime('%Y%m%d').astype(int)
         df.to_sql(name='Commodity', schema='dbo'
             , con=cnx, if_exists='replace', index=False,index_label=False)

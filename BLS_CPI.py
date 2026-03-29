@@ -64,7 +64,8 @@ class BLS_CPI:
                     pct_changes = calculations['pct_changes']
                     #get the 12th month in the JSON:
                     annual_pct_chg = pct_changes['12']
-                    #mnthly = pct_changes['1']
+                    #add this back
+                    mnthly = pct_changes['1']
                     mth_3 = pct_changes['3']
                     half_yr = pct_changes['6']
                     yoy = pct_changes['12']
@@ -72,9 +73,10 @@ class BLS_CPI:
                     # the first day of each month (for example: January 1, 2022).
                     month = period_name + ' 1 ' + year
                     #Write the CSV record to the output file.
-                    d_wrtr.writerow([series_id, month, value,annual_pct_chg  
-                                 #,mnthly,
-                                 , mth_3,half_yr, yoy])
+                    d_wrtr.writerow([series_id, month, value,annual_pct_chg 
+                             ,mnthly, mth_3,
+                             half_yr, yoy
+                                     ])
         #place in dataframe format from
         dt = pd.read_csv(self.out_file_nm)
         df_cpi = pd.DataFrame(data=dt)
@@ -90,17 +92,17 @@ class BLS_CPI:
         engine = sq.create_engine(conn_str)
         #cast to date yyyy-mm-dd
         cnx = engine.connect()
-        df.to_sql(name='BLS_Test_Run', schema='dbo'
+        df.to_sql(name='BLS_GAS_CPI', schema='dbo'
             , con=cnx, if_exists='replace', index=False,index_label=False)
         cnx.close()
         
         
-        
+ #run main method       
 df_ky = pd.read_csv('src/API_KEY.csv')
 BLS_API_KEY = df_ky['BLS_API'][0]         
-#CPI_Data = CPI_BLS(BLS_API_KEY, 'CPI_QA.csv',
-#                       ['CUSR0000SETB01', 'CUSR0000SAF1', 'CUSR0000SETA02']
-#                         ,2010, 2025)
-CPI_Data = BLS_CPI(BLS_API_KEY, 'CPI.csv',
-                        ['CUSR0000SA0','CUSR0000SETB01', 'CUSR0000SAF1', 'CUSR0000SETA02']
-                         ,2010, 202)
+CPI_Data = BLS_CPI(BLS_API_KEY, 'CPI_QA.csv',
+                       ['CUSR0000SETB01']#, 'CUSR0000SAF1', 'CUSR0000SETA02']
+                        ,2010, 2026)
+#CPI_Data = BLS_CPI(BLS_API_KEY, 'CPI.csv',
+#                        ['CUSR0000SA0','CUSR0000SETB01', 'CUSR0000SAF1', 'CUSR0000SETA02']
+#                         ,2011, 2025)
