@@ -1,7 +1,9 @@
 {
     "status": "REQUEST_SUCCEEDED",
-    "responseTime": 114,
-    "message": [],
+    "responseTime": 111,
+    "message": [
+        "BLS does not produce net change calculations for Series CUSR0000SETB01"
+    ],
     "Results": {
         "series": [
             {
@@ -9,9 +11,27 @@
                 "data": [
                     {
                         "year": "2026",
+                        "period": "M02",
+                        "periodName": "February",
+                        "latest": "true",
+                        "value": "276.754",
+                        "footnotes": [
+                            {}
+                        ],
+                        "calculations": {
+                            "net_changes": {},
+                            "pct_changes": {
+                                "1": "0.8",
+                                "3": "-2.7",
+                                "6": "2.2",
+                                "12": "-5.6"
+                            }
+                        }
+                    },
+                    {
+                        "year": "2026",
                         "period": "M01",
                         "periodName": "January",
-                        "latest": "true",
                         "value": "274.547",
                         "footnotes": [
                             {}

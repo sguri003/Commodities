@@ -52,12 +52,13 @@ class Stocks:
         #dt_dt = dt.reset_index()
         return dt
 
-    #Primary function to pull tickers from yfinanace.
-    #Returns Dataframe with reshaped index...dataframe comes in series with main index of date.
-    #Yfinance returns a series with Date the index requires reshape fn().
-    #CL=F is ticker for WTI crude oil, BZ=F=Brent crude oil. 
+
+     #Primary function to pull tickers from yfinanace.
+     #Returns Dataframe with reshaped index...dataframe comes in series with main index of date.
+     #Yfinance returns a series with Date the index requires reshape fn().
+     #CL=F is ticker for WTI crude oil, BZ=F=Brent crude oil. 
     def ticks_sql(self)->pd.DataFrame:
-        ticker_lst =['PL=F', 'GC=F','SI=F','HG=F','PA=F', 'CL=F', 'BZ=F' ,'NDX', 'XEL', 'CVX', 'B', 'MP']
+        ticker_lst =['PL=F', 'GC=F','SI=F','HG=F','PA=F', 'CL=F', 'BZ=F' ,'NDX', 'XEL', 'CVX', 'B', 'MP', 'DJI']
         dt = yf.download(ticker_lst, start='2010-01-01', group_by='ticker')
         #Download historical data for the last year
         dt = pd.DataFrame(data=dt)
@@ -68,7 +69,7 @@ class Stocks:
         #print(dt_f.columns)
         return dt_f    
         
-        
+    #method for plotting
     def plotting(self, dt: pd.DataFrame):
         y1= dt['GC_F']['Close']
         y2 = dt['PL_F']['Close']
@@ -91,7 +92,9 @@ class Stocks:
         plt.show()
         #print(dt.head(10))
         
-     #USE DB CLASS         
+     #USE DB CLASS   
+     #insert stock/futures data into SQL-server.  
+     #creates datekey for database date dimension.      
     def sql_insert(self,df:pd.DataFrame):
         SERVER= "DESKTOP-03RVSDU\SQLEXPRESS"
         DB_NAME = "Labor_Stats"
