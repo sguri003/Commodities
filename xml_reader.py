@@ -60,7 +60,7 @@ def parse_element(elem, item):
         for child in list(elem):
             parse_element(child, item)   
             
-tree = ET.parse('CPI_Data.xml')
+tree = ET.parse('test.xml')
 root = tree.getroot()
 #make array to store dictionary xml results
 data= []

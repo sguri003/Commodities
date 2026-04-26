@@ -96,3 +96,8 @@ class xml_parser:
                              #'strfld': sqlalchemy.types.NVARCHAR(length=255)
                              #'floatfld': sqlalchemy.types.Float(precision=3, asdecimal=True)
                              #'booleanfld': sqlalchemy.types.Boolean}))
+                             
+                             
+x = xml_parser(f_path="CPI_Data.xml")
+df_xml = x.parse_tree()
+print(df_xml)
