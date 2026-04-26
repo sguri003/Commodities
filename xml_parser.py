@@ -11,7 +11,7 @@ class xml_parser:
         self.f_path=f_path
         
     def find_node(self, elem, item):
-            #if no child node then sinsert into dictionary(). 
+            #if no child node then insert into dictionary(). 
         if len(list(elem))==0:
             item[elem.tag]=elem.text     
             #print(elem.text)                              

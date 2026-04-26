@@ -20,12 +20,6 @@ def read_x():
         print("xpath")
         print(movie.attrib)
    
-    #print(root[1].attrib)
-    #for node in root.findall('./data/row/'):
-        #print(node.find('Series_ID').attrib)
-        #print(node.find('Dt'))
-        #print(node.findall('Per_Change'))    
-        #print(node.findall('Value'))
     #retrive tags from XML
 def get_txt(): 
     tree = ET.parse('test.xml')
