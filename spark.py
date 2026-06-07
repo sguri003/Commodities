@@ -15,7 +15,7 @@ spark = SparkSession.builder \
     .getOrCreate()
 
 # Verify the connection works
-df  = spark.read.option("header", "true").csv("Test_Out.csv")
+df  = spark.read.format("csv").option("header","true").load("CPI_Out.csv")
 df.show()
 # Always stop the session at the end
 spark.stop()

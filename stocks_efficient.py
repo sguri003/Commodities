@@ -11,7 +11,7 @@ from DB import DB
 class Stocks:
 
     def __init__(self):
-        f_key = pd.read_csv('../src/API_KEY.csv')
+        f_key = pd.read_csv('/src/API_KEY.csv')
         self._fred_key = f_key['Fred_key'][0]
 
     def get_today(self) -> str:
@@ -25,10 +25,8 @@ class Stocks:
 
     def _download_tickers(self, tickers: list, start: str) -> pd.DataFrame:
         dt = yf.download(tickers, start=start, group_by='ticker').reset_index()
-        dt.columns = [
-            '_'.join(col).strip().replace('=', '_')
-            for col in dt.columns.values
-        ]
+        dt.columns = ['_'.join(col).strip().replace('=', '_') 
+                      for col in dt.columns.values]
         return np.round(dt, decimals=2)
 
     def ticks_plt(self) -> pd.DataFrame:
