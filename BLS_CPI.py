@@ -101,8 +101,8 @@ class BLS_CPI:
 df_ky = pd.read_csv('src/API_KEY.csv')
 BLS_API_KEY = df_ky['BLS_API'][0]         
 CPI_Data = BLS_CPI(BLS_API_KEY, 'CPI_QA.csv',
-                       ['CUSR0000SETB01']#, 'CUSR0000SAF1', 'CUSR0000SETA02']
-                        ,2010, 2026)
+                       ['CUSR0000SETB01'] #'CUSR0000SAF1'] #, 'CUSR0000SAF1', 'CUSR0000SETA02']
+                        ,2012, 2026)
 #CPI_Data = BLS_CPI(BLS_API_KEY, 'CPI.csv',
 #                        ['CUSR0000SA0','CUSR0000SETB01', 'CUSR0000SAF1', 'CUSR0000SETA02']
 #                         ,2011, 2025)

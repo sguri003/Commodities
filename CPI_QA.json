@@ -1,9 +1,7 @@
 {
     "status": "REQUEST_SUCCEEDED",
-    "responseTime": 111,
-    "message": [
-        "BLS does not produce net change calculations for Series CUSR0000SETB01"
-    ],
+    "responseTime": 112,
+    "message": [],
     "Results": {
         "series": [
             {
@@ -11,9 +9,45 @@
                 "data": [
                     {
                         "year": "2026",
+                        "period": "M04",
+                        "periodName": "April",
+                        "latest": "true",
+                        "value": "353.740",
+                        "footnotes": [
+                            {}
+                        ],
+                        "calculations": {
+                            "net_changes": {},
+                            "pct_changes": {
+                                "1": "5.4",
+                                "3": "28.8",
+                                "6": "27.7",
+                                "12": "28.4"
+                            }
+                        }
+                    },
+                    {
+                        "year": "2026",
+                        "period": "M03",
+                        "periodName": "March",
+                        "value": "335.500",
+                        "footnotes": [
+                            {}
+                        ],
+                        "calculations": {
+                            "net_changes": {},
+                            "pct_changes": {
+                                "1": "21.2",
+                                "3": "18.3",
+                                "6": "19.5",
+                                "12": "18.9"
+                            }
+                        }
+                    },
+                    {
+                        "year": "2026",
                         "period": "M02",
                         "periodName": "February",
-                        "latest": "true",
                         "value": "276.754",
                         "footnotes": [
                             {}
@@ -3067,438 +3101,6 @@
                                 "3": "0.1",
                                 "6": "0.4",
                                 "12": "11.0"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2011",
-                        "period": "M12",
-                        "periodName": "December",
-                        "value": "300.662",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "-2.6",
-                                "3": "-2.8",
-                                "6": "-1.2",
-                                "12": "10.7"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2011",
-                        "period": "M11",
-                        "periodName": "November",
-                        "value": "308.587",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "0.9",
-                                "3": "0.8",
-                                "6": "-2.0",
-                                "12": "20.3"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2011",
-                        "period": "M10",
-                        "periodName": "October",
-                        "value": "305.963",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "-1.0",
-                                "3": "0.3",
-                                "6": "-1.3",
-                                "12": "22.4"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2011",
-                        "period": "M09",
-                        "periodName": "September",
-                        "value": "309.168",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "0.9",
-                                "3": "1.6",
-                                "6": "4.8",
-                                "12": "31.2"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2011",
-                        "period": "M08",
-                        "periodName": "August",
-                        "value": "306.276",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "0.5",
-                                "3": "-2.7",
-                                "6": "9.4",
-                                "12": "31.6"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2011",
-                        "period": "M07",
-                        "periodName": "July",
-                        "value": "304.901",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "0.2",
-                                "3": "-1.7",
-                                "6": "10.5",
-                                "12": "33.1"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2011",
-                        "period": "M06",
-                        "periodName": "June",
-                        "value": "304.321",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "-3.3",
-                                "3": "3.2",
-                                "6": "12.1",
-                                "12": "36.6"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2011",
-                        "period": "M05",
-                        "periodName": "May",
-                        "value": "314.859",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "1.5",
-                                "3": "12.4",
-                                "6": "22.7",
-                                "12": "38.2"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2011",
-                        "period": "M04",
-                        "periodName": "April",
-                        "value": "310.115",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "5.2",
-                                "3": "12.4",
-                                "6": "24.1",
-                                "12": "33.3"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2011",
-                        "period": "M03",
-                        "periodName": "March",
-                        "value": "294.915",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "5.3",
-                                "3": "8.6",
-                                "6": "25.1",
-                                "12": "26.5"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2011",
-                        "period": "M02",
-                        "periodName": "February",
-                        "value": "280.015",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "1.5",
-                                "3": "9.1",
-                                "6": "20.3",
-                                "12": "18.8"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2011",
-                        "period": "M01",
-                        "periodName": "January",
-                        "value": "275.816",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "1.6",
-                                "3": "10.4",
-                                "6": "20.4",
-                                "12": "14.0"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2010",
-                        "period": "M12",
-                        "periodName": "December",
-                        "value": "271.509",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "5.8",
-                                "3": "15.2",
-                                "6": "21.9",
-                                "12": "14.4"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2010",
-                        "period": "M11",
-                        "periodName": "November",
-                        "value": "256.596",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "2.7",
-                                "3": "10.3",
-                                "6": "12.7",
-                                "12": "7.7"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2010",
-                        "period": "M10",
-                        "periodName": "October",
-                        "value": "249.885",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "6.0",
-                                "3": "9.1",
-                                "6": "7.4",
-                                "12": "9.3"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2010",
-                        "period": "M09",
-                        "periodName": "September",
-                        "value": "235.661",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "1.3",
-                                "3": "5.8",
-                                "6": "1.1",
-                                "12": "4.2"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2010",
-                        "period": "M08",
-                        "periodName": "August",
-                        "value": "232.674",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "1.6",
-                                "3": "2.2",
-                                "6": "-1.3",
-                                "12": "4.0"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2010",
-                        "period": "M07",
-                        "periodName": "July",
-                        "value": "229.026",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "2.8",
-                                "3": "-1.5",
-                                "6": "-5.4",
-                                "12": "8.2"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2010",
-                        "period": "M06",
-                        "periodName": "June",
-                        "value": "222.745",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "-2.2",
-                                "3": "-4.4",
-                                "6": "-6.1",
-                                "12": "4.5"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2010",
-                        "period": "M05",
-                        "periodName": "May",
-                        "value": "227.765",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "-2.1",
-                                "3": "-3.4",
-                                "6": "-4.4",
-                                "12": "28.6"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2010",
-                        "period": "M04",
-                        "periodName": "April",
-                        "value": "232.594",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "-0.2",
-                                "3": "-3.9",
-                                "6": "1.7",
-                                "12": "38.2"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2010",
-                        "period": "M03",
-                        "periodName": "March",
-                        "value": "233.103",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "-1.1",
-                                "3": "-1.7",
-                                "6": "3.0",
-                                "12": "39.7"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2010",
-                        "period": "M02",
-                        "periodName": "February",
-                        "value": "235.748",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "-2.6",
-                                "3": "-1.0",
-                                "6": "5.3",
-                                "12": "35.4"
-                            }
-                        }
-                    },
-                    {
-                        "year": "2010",
-                        "period": "M01",
-                        "periodName": "January",
-                        "value": "242.036",
-                        "footnotes": [
-                            {}
-                        ],
-                        "calculations": {
-                            "net_changes": {},
-                            "pct_changes": {
-                                "1": "2.0",
-                                "3": "5.9",
-                                "6": "14.4",
-                                "12": "50.5"
                             }
                         }
                     }

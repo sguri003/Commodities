@@ -108,7 +108,7 @@ class Stocks:
         df.to_sql(name='Commodity', schema='dbo'
             , con=cnx, if_exists='replace', index=False,index_label=False)
         #close connection DB:Close()
-        print(sq.inspect(cnx).has_table('Commodity'))
+        print(sq.inspect(cnx).has_table('Commodity_Test'))
         db.close_cnx()    
     
     def csv_x(self, df:pd.DataFrame):
