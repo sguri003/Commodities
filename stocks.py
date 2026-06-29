@@ -58,7 +58,8 @@ class Stocks:
      #Yfinance returns a series with Date the index requires reshape fn().
      #CL=F is ticker for WTI crude oil, BZ=F=Brent crude oil. 
     def ticks_sql(self)->pd.DataFrame:
-        ticker_lst =['PL=F', 'GC=F','SI=F','HG=F','PA=F', 'CL=F', 'BZ=F' ,'NDX', 'XEL', 'CVX', 'B', 'MP', 'DJI']
+        ticker_lst =['PL=F', 'GC=F','SI=F','HG=F','PA=F', 'CL=F'
+                     , 'BZ=F' ,'NDX', 'XEL', 'CVX', 'B', 'MP', 'DJI']
         dt = yf.download(ticker_lst, start='2010-01-01', group_by='ticker')
         #Download historical data for the last year
         dt = pd.DataFrame(data=dt)

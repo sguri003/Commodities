@@ -13,6 +13,7 @@ class Stocks:
     def __init__(self):
         f_key = pd.read_csv('/src/API_KEY.csv')
         self._fred_key = f_key['Fred_key'][0]
+        
 
     def get_today(self) -> str:
         return date.today().strftime('%Y-%m-%d')
