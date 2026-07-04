@@ -81,7 +81,7 @@ class BLS_CPI:
         dt = pd.read_csv(self.out_file_nm)
         df_cpi = pd.DataFrame(data=dt)
         df_cpi['Date'] = pd.to_datetime(dt['Date'], format="mixed")
-        df_cpi.to_csv("CPI_Data_ML.csv")
+        df_cpi.to_csv("BLS_API_OUTPUT.csv")
         print(df_cpi)
         return df_cpi
 
@@ -92,7 +92,7 @@ class BLS_CPI:
         engine = sq.create_engine(conn_str)
         #cast to date yyyy-mm-dd
         cnx = engine.connect()
-        df.to_sql(name='BLS_GAS_CPI', schema='dbo'
+        df.to_sql(name='BLS_2026', schema='dbo'
             , con=cnx, if_exists='replace', index=False,index_label=False)
         cnx.close()
         
@@ -101,8 +101,8 @@ class BLS_CPI:
 df_ky = pd.read_csv('src/API_KEY.csv')
 BLS_API_KEY = df_ky['BLS_API'][0]         
 CPI_Data = BLS_CPI(BLS_API_KEY, 'CPI_QA.csv',
-                       ['CUSR0000SETB01'] #'CUSR0000SAF1'] #, 'CUSR0000SAF1', 'CUSR0000SETA02']
-                        ,2012, 2026)
+                       ['CUSR0000SETB01','CES0500000003']# 'CUSR0000SAF1','CES0500000003'] #, 'CUSR0000SAF1', 'CUSR0000SETA02']
+                        ,2015, 2026)
 #CPI_Data = BLS_CPI(BLS_API_KEY, 'CPI.csv',
 #                        ['CUSR0000SA0','CUSR0000SETB01', 'CUSR0000SAF1', 'CUSR0000SETA02']
 #                         ,2011, 2025)
